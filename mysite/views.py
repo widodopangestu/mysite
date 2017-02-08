@@ -85,4 +85,10 @@ def contact(request):
     return render(request, 'contact_form.html', {'form': form})
 
 def html_escape(request):
-    return render(request, 'html_escape.html', {'name': '<b>Widodo Pangestu</b>'})
+    return render(request, 'html_escape.html', {'name': '<b>Widodo Pangestu</b>', 'data': '<i>Test Italic</i>', 'other_data': '<u>test Underline</u>'})
+
+def html_escape_include(request):
+    return render(request, 'echild.html', {'greeting': 'Hello <b>Widodo Pangestu</b>'})
+
+def template_tag(request):
+    return render(request, 'template_tag.html', {'name': '<b>Widodo Pangestu</b>', 'data': '<i>Test Italic</i>', 'other_data': '<u>test Underline</u>', 'num': 1000.23})

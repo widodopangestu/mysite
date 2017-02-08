@@ -1,0 +1,10 @@
+{% load mysite_extras %}
+
+{{name|cut:"o"}}
+
+{{name|lower}}
+
+{{num|lower}}
+
+{% get_current_time "%Y-%m-%d %I:%M %p" as the_time %}
+<p>The time is {{ the_time }}.</p>

@@ -1,0 +1,16 @@
+<pre>
+This will be escaped: {{ name }}
+This will not be escaped: {{ name|safe }}
+
+Auto-escaping is on by default. Hello {{ name }}
+{% autoescape off %}
+   This will not be auto-escaped: {{ data }}.
+   Nor this: {{ other_data }}
+   {% autoescape on %}
+       Auto-escaping applies again: {{ name }}
+   {% endautoescape %}
+{% endautoescape %}
+
+{{ data|default:"This is a string literal." }}
+
+</pre>

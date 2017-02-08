@@ -34,4 +34,8 @@ urlpatterns = [
     url(r'^meta/$', v1.display_meta),
     url(r'^contact/$', v1.contact),
     url(r'^books/', include('books.urls')),
+    url(r'^contact/$', v1.contact),
+    url(r'^html-escape/$', v1.html_escape),
+    url(r'^html-escape-include/$', v1.html_escape_include),
+    url(r'^template-tag/$', v1.template_tag),
 ]

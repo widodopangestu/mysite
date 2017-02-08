@@ -20,4 +20,6 @@ urlpatterns = [
     url(r'^search-form/$', views.search_form),
     url(r'^search/$', views.search),
     url(r'^vsearch/$', views.validate_search),
+    url(r'^all-authors/$', views.all_authors),
+    url(r'^all-authors-ctx/$', views.all_authors_ctx),
 ]

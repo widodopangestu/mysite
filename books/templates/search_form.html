@@ -1,9 +1,10 @@
+{% load books_extras %}
 <html>
 <head>
     <title>Search</title>
 </head>
 <body>
-
+    {% jump_link %}
     {% if error %}
         <p style="color: red;">Please submit a search term.</p>
     {% endif %}

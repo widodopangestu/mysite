@@ -1,0 +1,13 @@
+{% load books_extras %}
+<html>
+<head>
+    <title>All Authors</title>
+</head>
+<body>
+    <ul>
+    {% for author in authors %}
+        <li>{{ author}}<br>{% books_for_author_ctx author %}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>
