@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from .models import Book, Author
+from django.utils import timezone
+from django.views.generic import ListView, DetailView
+from .models import Book, Author, Publisher
 # Create your views here.
 def search_form(request):
     return render(request, 'search_form.html')
@@ -33,3 +35,49 @@ def all_authors(request):
 def all_authors_ctx(request):
     authors = Author.objects.all()
     return render(request, 'all_authors_ctx.html', {'authors': authors, 'username': 'Widodo Pangestu'})
+
+class PublisherListView(ListView):
+    model = Publisher
+    context_object_name = 'publishers'
+
+class BookListView(ListView):
+    model = Book
+    queryset = Book.objects.order_by('-publication_date')
+    context_object_name = 'books'
+
+class PublisherDetailView(DetailView):
+    #model = Publisher
+    context_object_name = 'publisher'
+    queryset = Publisher.objects.all()
+    def get_context_data(self, **kwargs):
+        context = super(PublisherDetailView, self).get_context_data(**kwargs)
+        context['book_list'] = Book.objects.all()
+        return context
+
+class AuthorDetailView(DetailView):
+    model = Author
+    queryset = Author.objects.all()
+
+    def get_object(self):
+        object = super(AuthorDetailView, self).get_object()
+        object.last_accessed = timezone.now()
+        object.save()
+        return object
+
+class ApressBookList(ListView):
+    context_object_name = 'books'
+    queryset = Book.objects.filter(publisher__name='Apress Publishing')
+    template_name = 'books/apress_list.html'
+
+class PublisherBookList(ListView):
+    context_object_name = 'books'
+    template_name = 'books/books_by_publisher.html'
+
+    def get_queryset(self):
+        self.publisher = get_object_or_404(Publisher, id=self.args[0])
+        return Book.objects.filter(publisher=self.publisher)
+
+    def get_context_data(self, **kwargs):
+        context = super(PublisherBookList, self).get_context_data(**kwargs)
+        context['publisher'] = self.publisher
+        return context

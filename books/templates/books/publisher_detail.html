@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Author Detail {{publisher}}</h2>
+    <ul>
+       <li>{{publisher.name}}</li>
+       <li>{{publisher.address}}</li>
+       <li>{{publisher.city}}</li>
+       <li>{{publisher.state_province}}</li>
+       <li>{{publisher.country}}</li>
+       <li>{{publisher.website}}</li>
+    </ul>
+
+    <ul>
+       {% for book in book_list %}
+           <li>{{ book.title }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

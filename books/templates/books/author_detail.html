@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Author Detail {{object}}</h2>
+    <ul>
+       <li>{{object.first_name}}</li>
+       <li>{{object.last_name}}</li>
+       <li>{{object.email}}</li>
+       <li>{{object.headshot}}</li>
+       <li>{{object.last_accessed}}</li>
+
+    </ul>
+{% endblock %}

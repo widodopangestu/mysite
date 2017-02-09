@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
+from .views import *
 from . import views
 
 urlpatterns = [
@@ -22,4 +23,10 @@ urlpatterns = [
     url(r'^vsearch/$', views.validate_search),
     url(r'^all-authors/$', views.all_authors),
     url(r'^all-authors-ctx/$', views.all_authors_ctx),
+    url(r'^publishers/$', PublisherListView.as_view()),
+    url(r'^books/$', BookListView.as_view()),
+    url(r'^publishers/(?P<pk>[0-9]+)/$', PublisherDetailView.as_view(), name='publisher-detail'),
+    url(r'^authors/(?P<pk>[0-9]+)/$', AuthorDetailView.as_view(), name='author-detail'),
+    url(r'^apress-books/$', ApressBookList.as_view()),
+    url(r'^books-by-publisher/([\w-]+)/$', PublisherBookList.as_view()),
 ]
